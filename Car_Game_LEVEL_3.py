@@ -17,6 +17,17 @@ GREEN = (188, 227, 199)
 BLUE = (32, 32, 200)
 RED = (0, 255, 0)
 
+ROAD_WIDTH = 600
+LANE_MARKER_WIDTH = 10
+LANE_MARKER_HEIGHT = 50
+
+
+
+def draw_road():
+    
+    pygame.draw.rect(screen, GRAY, 
+                    (SCREEN_WIDTH//2 - ROAD_WIDTH//2, 0, ROAD_WIDTH, SCREEN_HEIGHT))
+    
 
 
 
@@ -26,5 +37,8 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
+    screen.fill(BLACK)
+    draw_road()
+    pygame.display.update()
 
 pygame.quit()
