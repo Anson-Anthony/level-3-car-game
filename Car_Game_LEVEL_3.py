@@ -20,10 +20,21 @@ RED = (0, 255, 0)
 ROAD_WIDTH = 600
 LANE_MARKER_WIDTH = 10
 LANE_MARKER_HEIGHT = 50
-score = 0
-high_score = 0
 
+#where player spawns
+washing_machine_X = 250
+washing_machine_Y = 600
+#player score
+score = 0
+#player high score
+high_score = 0
+#speed of road, how fast it goes down, and how fast enemie car comes
 speed = 5
+game_over = False
+
+washing_machine = pygame.image.load("Player_washing_machine.png")
+washing_machine = pygame.transform.scale(washing_machine, (100, 100))
+
 
 try:
     with open("highscore.txt") as file:
@@ -51,6 +62,13 @@ def draw_road():
         marker[1] += speed
         if marker[1] > SCREEN_HEIGHT:
             marker[1] = -LANE_MARKER_HEIGHT
+
+
+
+
+    screen.blit(washing_machine, (washing_machine_X, washing_machine_Y))
+
+
 
 
 running = True
