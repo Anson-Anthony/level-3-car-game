@@ -23,7 +23,7 @@ LANE_MARKER_WIDTH = 10
 LANE_MARKER_HEIGHT = 50
 
 # player varable
-washing_machine_X = 200
+washing_machine_X = 250
 washing_machine_Y = 600
 score = 0
 high_score = 0
@@ -45,14 +45,15 @@ except:
 
 # Create 4 lane
 road_markers = []
-for lane_x in [100, 200, 300, 400]: 
+for lane_x in [50, 150, 250, 350, 450]:
     for i in range(5):
         road_markers.append([lane_x - LANE_MARKER_WIDTH//2, i * 200])
 
-# Enemy cars
+
+#Enemy cars where they spawn and speed and how ramdon it spawn
 enemies = []
 for _ in range(4):
-    Normal_car_x = random.choice([100, 200, 300, 400]) 
+    Normal_car_x = random.choice([50, 150, 250, 350, 450])
     Normal_car_y = random.randint(-1500, -100)
     enemies.append([Normal_car_x, Normal_car_y, random.randint(3, 6)])
 
