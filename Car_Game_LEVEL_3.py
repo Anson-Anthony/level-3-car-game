@@ -82,8 +82,15 @@ while running:
         if event.type == pygame.QUIT:
             running = False
 
-        
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_LEFT:
+                if washing_machine_X > 50:
+                    washing_machine_X -= 100
+            if event.key == pygame.K_RIGHT:
+                if washing_machine_X < 350:
+                    washing_machine_X += 100
 
+        
     screen.fill(BLACK)
     draw_road()
     
