@@ -33,7 +33,7 @@ game_over = False
 # import images
 washing_machine = pygame.image.load("Player_washing_machine.png")
 washing_machine = pygame.transform.scale(washing_machine, (100, 100))
-Normal_car = pygame.image.load("Lemon_car.png")
+Normal_car = pygame.image.load("face_car.png")
 Normal_car = pygame.transform.scale(Normal_car, (100, 100))
 
 # high score save file
@@ -53,7 +53,7 @@ for lane_x in [50, 150, 250, 350, 450]:
 #Enemy cars where they spawn and speed and how ramdon it spawn
 enemies = []
 for _ in range(4):
-    Normal_car_x = random.choice([50, 150, 250, 350, 450])
+    Normal_car_x = random.choice([50, 150, 250, 350])
     Normal_car_y = random.randint(-1500, -100)
     enemies.append([Normal_car_x, Normal_car_y, random.randint(3, 6)])
 
@@ -98,7 +98,7 @@ while running:
                 score = 0
                 enemies = []
                 for _ in range(4):
-                    Normal_car_x = random.choice([50, 150, 250, 350, 450])
+                    Normal_car_x = random.choice([50, 150, 250, 350])
                     Normal_car_y = random.randint(-1500, -100)
                     enemies.append([Normal_car_x, Normal_car_y, random.randint(3, 6)])
 
@@ -112,7 +112,7 @@ while running:
             enemy[1] += enemy[2]
             if enemy[1] > SCREEN_HEIGHT:
                 enemy[1] = random.randint(-1500, -100)
-                enemy[0] = random.choice([50, 150, 250, 350, 450])
+                enemy[0] = random.choice([50, 150, 250, 350])
                 enemy[2] = random.randint(3, 6)
                 score += 1 
 
@@ -123,7 +123,7 @@ while running:
                 game_over = True
                 if score > high_score:
                     high_score = score
-                    with open("highscore.txt", "w") as file:
+                    with open("highscore.txt") as file:
                         file.write(str(high_score))
     if game_over:
         font = pygame.font.Font(None, 74)
