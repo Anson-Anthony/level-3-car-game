@@ -43,8 +43,8 @@ try:
 except:
     high_score = 0
 
-# Create 4 lane
-road_markers = []
+# Create 4 lane 
+road_markers = [] #empnty list varable
 for lane_x in [50, 150, 250, 350, 450]:
     for i in range(5):
         road_markers.append([lane_x - LANE_MARKER_WIDTH//2, i * 200])
@@ -83,16 +83,56 @@ while running:
             running = False
 
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT:
+            # Prevent movement if game over
+            if event.key == pygame.K_LEFT and not game_over:
                 if washing_machine_X > 50:
                     washing_machine_X -= 100
-            if event.key == pygame.K_RIGHT:
+            if event.key == pygame.K_RIGHT and not game_over:
                 if washing_machine_X < 350:
                     washing_machine_X += 100
+
+            if event.key == pygame.K_r and game_over:
+                game_over = False
+                washing_machine_X = 250
+                washing_machine_Y = 600
+                score = 0
+                enemies = []
+                for _ in range(4):
+                    Normal_car_x = random.choice([50, 150, 250, 350, 450])
+                    Normal_car_y = random.randint(-1500, -100)
+                    enemies.append([Normal_car_x, Normal_car_y, random.randint(3, 6)])
 
         
     screen.fill(BLACK)
     draw_road()
+
+
+    if not game_over:
+        for enemy in enemies:
+            enemy[1] += enemy[2]
+            if enemy[1] > SCREEN_HEIGHT:
+                enemy[1] = random.randint(-1500, -100)
+                enemy[0] = random.choice([50, 150, 250, 350, 450])
+                enemy[2] = random.randint(3, 6)
+                score += 1 
+
+        player_rect = pygame.Rect(washing_machine_X, washing_machine_Y, 100, 100)
+        for enemy in enemies:
+            enemy_rect = pygame.Rect(enemy[0], enemy[1], 100, 100)
+            if player_rect.colliderect(enemy_rect):
+                game_over = True
+                if score > high_score:
+                    high_score = score
+                    with open("highscore.txt", "w") as file:
+                        file.write(str(high_score))
+    if game_over:
+        font = pygame.font.Font(None, 74)
+        text = font.render("GAME OVER", True, RED)
+        screen.blit(text, (SCREEN_WIDTH//2 - text.get_width()//2, SCREEN_HEIGHT//2 - 100))
+        font = pygame.font.Font(None, 36)
+        text = font.render("Press R to restart", True, WHITE)
+        screen.blit(text, (SCREEN_WIDTH//2 - text.get_width()//2, SCREEN_HEIGHT//2))
+
     
     
     font = pygame.font.Font(None, 36)
