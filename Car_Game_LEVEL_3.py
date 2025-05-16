@@ -29,16 +29,16 @@ LANE_MARKER_WIDTH = 10
 LANE_MARKER_HEIGHT = 50
 
 # player varable
-washing_machine_X = 250 #starting pision
-washing_machine_Y = 600 #starting pision
+player_car_X = 250 #starting pision
+player_car_Y = 600 #starting pision
 score = 0
 high_score = 0
 speed = 5 #speed of the cars coming down or road moving
 game_over = False 
 
 # import images
-washing_machine = pygame.image.load("Player_washing_machine.png")
-washing_machine = pygame.transform.scale(washing_machine, (100, 100))
+player_car = pygame.image.load("Player_washing_machine.png")
+player_car = pygame.transform.scale(player_car, (100, 100))
 Normal_car = pygame.image.load("jesus_with_baskball.png")
 Normal_car = pygame.transform.scale(Normal_car, (100, 100))
 
@@ -77,7 +77,7 @@ def draw_road(): #draw the element of the road and put the normal car on it
         if marker[1] > SCREEN_HEIGHT:
             marker[1] = -LANE_MARKER_HEIGHT
             #draw the mornal car and the player car 
-    screen.blit(washing_machine, (washing_machine_X, washing_machine_Y))
+    screen.blit(player_car, (player_car_X, player_car_Y))
     
     for enemy in enemies:
         screen.blit(Normal_car, (enemy[0], enemy[1]))
@@ -92,16 +92,16 @@ while running:
         if event.type == pygame.KEYDOWN:
             # Prevent movement if game over
             if event.key == pygame.K_LEFT and not game_over:
-                if washing_machine_X > 50:
-                    washing_machine_X -= 100 #move one lane left
+                if player_car_X > 50:
+                    player_car_X -= 100 #move one lane left
             if event.key == pygame.K_RIGHT and not game_over:
-                if washing_machine_X < 350:
-                    washing_machine_X += 100 #move one lane right
+                if player_car_X < 350:
+                    player_car_X += 100 #move one lane right
             #restart game
             if event.key == pygame.K_r and game_over:
                 game_over = False
-                washing_machine_X = 250
-                washing_machine_Y = 600
+                player_car_X = 250
+                player_car_Y = 600
                 score = 0
                 enemies = []
                 for _ in range(4): #reset the normal car after end of game
@@ -125,7 +125,7 @@ while running:
                 enemy[2] = random.randint(3, 6)
                 score += 1 
         #collision detection
-        player_rect = pygame.Rect(washing_machine_X, washing_machine_Y, 100, 100)
+        player_rect = pygame.Rect(player_car_X, player_car_Y, 100, 100)
         for enemy in enemies:
             enemy_rect = pygame.Rect(enemy[0], enemy[1], 100, 100)
             if player_rect.colliderect(enemy_rect):
