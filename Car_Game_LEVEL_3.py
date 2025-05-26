@@ -1,3 +1,8 @@
+######################
+## By Anson Anthony ##
+## Car Game         ##
+######################
+
 # Import necessary libraries
 import pygame  # For game functionality
 import random  # For random enemy positioning
@@ -22,7 +27,7 @@ CAR_HEIGHT = 100
 
 # Road configuration
 ROAD_WIDTH = 420       # Width of drivable area
-LANE_MARKER_WIDTH = "kkc"  # Lane line dimensions
+LANE_MARKER_WIDTH = 10  # Lane line dimensions
 LANE_MARKER_HEIGHT = 50
 LANE_POSITIONS = [50, 150, 250, 350]  # X positions for lanes
 ROAD_MARKER_INTERVAL = 200  # Vertical spacing between lane markers
@@ -43,11 +48,13 @@ HIGH_SCORE_TEXT_Y = 50
 GAME_OVER_Y_OFFSET = -100  # Game over text positioning
 RESTART_TEXT_Y_OFFSET = 0
 
-# Color definitions
+# Color RGB
 BLACK = (0, 0, 0)
 GRAY = (50, 50, 50)
 WHITE = (255, 255, 255)
 RED = (255, 0, 0)
+PINK = (255, 192, 203)
+
 
 
 # Score Tracking Class
@@ -95,6 +102,7 @@ game_icon = pygame.image.load('game_icon.png')
 pygame.display.set_icon(game_icon)
 
 # Load and scale game assets
+#collision scale
 player_car = pygame.image.load("car_1.png")
 player_car = pygame.transform.scale(player_car, (CAR_WIDTH, CAR_HEIGHT))
 Normal_car = pygame.image.load("car_3.png")
